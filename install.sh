@@ -67,24 +67,22 @@ apt-get update
 # Install required packages non-interactive
 DEBIAN_FRONTEND=noninteractive apt-get install -y \
 apache2 libapache2-mod-wsgi libav-tools mediainfo pacpl icecast2 \
-python-dev python-pip  python-dbus python-gst0.10 \
-gstreamer0.10-plugins-good \
-gstreamer0.10-tools \
+python-dev python-pip python-dbus python-gst0.10 \
+gstreamer0.10-plugins-good gstreamer0.10-tools \
 binutils libproj-dev gdal-bin libgdal-dev \
 postgresql-server-dev-9.5 postgresql-9.5-postgis-2.2 \
 libsidplay1v5
 
-# Download correct port of gstreamer-plugins-ugly/bad, for lame support
-# gstreamer0.10-plugins-ugly/bad were removed from Ubuntu 16.04 in favor of gstreamer1.0
+# Download correct port of gstreamer-plugins-ugly, for lame support
+# gstreamer0.10-plugins-ugly were removed from Ubuntu 16.04 in favor of gstreamer1.0
 # via: https://launchpad.net/ubuntu/xenial/amd64/gstreamer0.10-plugins-ugly/0.10.19-2.1ubuntu4
 wget http://launchpadlibrarian.net/225705147/gstreamer0.10-plugins-ugly_0.10.19-2.1ubuntu4_amd64.deb
 
-# via: https://launchpad.net/ubuntu/xenial/amd64/gstreamer0.10-plugins-bad/0.10.23-8.1ubuntu3
-wget http://launchpadlibrarian.net/216017741/gstreamer0.10-plugins-bad_0.10.23-8.1ubuntu3_amd64.deb
-
-# install gstreamere-plugins-ugly/bad
+# install gstreamer-plugins-ugly
 dpkg -i gstreamer0.10-plugins-ugly_0.10.19-2.1ubuntu4_amd64.deb
-dpkg -i gstreamer0.10-plugins-bad_0.10.23-8.1ubuntu3_amd64.deb
+
+# delete downloaded file
+rm gstreamer0.10-plugins-ugly_0.10.19-2.1ubuntu4_amd64.deb
 
 # Install/upgrade virtualenv
 pip install -U virtualenv
